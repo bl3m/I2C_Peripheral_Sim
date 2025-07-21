@@ -6,12 +6,13 @@
 	<deviceVariant value="Cortex M.TM4C123GH6PM"/>
 	<deviceFamily value="TMS470"/>
 	<deviceEndianness value="little"/>
-	<codegenToolVersion value="20.2.7.LTS"/>
+	<codegenToolVersion value="GNU_14.2.1"/>
 	<isElfFormat value="true"/>
-	<linkerCommandFile value="tm4c123gh6pm.cmd"/>
+	<connection value="common/targetdb/connections/Stellaris_ICDI_Connection.xml"/>
+	<linkerCommandFile value="tm4c123gh6pm.lds"/>
 	<rts value="libc.a"/>
 	<createSlaveProjects value=""/>
-	<templateProperties value="id=com.ti.common.project.core.emptyProjectWithMainTemplate"/>
-	<filesToOpen value="main.c"/>
+	<templateProperties value="id=com.ti.common.project.core.emptyProjectTemplate_gnu_arm"/>
+	<filesToOpen value=""/>
 	<isTargetManual value="false"/>
 </projectOptions>

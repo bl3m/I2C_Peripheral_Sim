@@ -4,19 +4,20 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS
+CG_TOOL_ROOT := C:/arm/Arm-GNU-Toolchain-arm-none-eabi/14.2-rel1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./MAX7300.obj" \
-"./main.obj" \
-"./tm4c123gh6pm_startup_ccs.obj" \
-"../tm4c123gh6pm.cmd" \
+"./MAX7300.o" \
+"./main.o" \
+"./tm4c123gh6pm_startup_ccs_gcc.o" \
+-Wl,-T"../tm4c123gh6pm.lds" \
 $(GEN_CMDS__FLAG) \
--llibc.a \
--l"C:/ti/TivaWare_C_Series-2.2.0.295/driverlib/ccs/Debug/driverlib.lib" \
+-Wl,--start-group \
+"C:/ti/TivaWare_C_Series-2.2.0.295/driverlib/ccs/Debug/driverlib.lib" \
+-Wl,--end-group \
 
 -include ../makefile.init
 
@@ -130,22 +131,22 @@ EXE_OUTPUTS__QUOTED += \
 
 
 # All Target
-all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "I2C_Peripheral_Sim.out"
+all: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
+	@$(MAKE) --no-print-directory "I2C_Peripheral_Sim.out"
 
 # Tool invocations
-I2C_Peripheral_Sim.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+I2C_Peripheral_Sim.out: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
-	@echo 'Invoking: Arm Linker'
-	"C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me -O2 --define=ccs="ccs" --define=PART_TM4C123GH6PM --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"I2C_Peripheral_Sim.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="I2C_Peripheral_Sim_linkInfo.xml" --rom_model -o "I2C_Peripheral_Sim.out" $(ORDERED_OBJS)
+	@echo 'Invoking: GNU Linker'
+	"C:/arm/Arm-GNU-Toolchain-arm-none-eabi/14.2-rel1/bin/arm-none-eabi-gcc-14.2.1.exe" -mfpu=fpv4-sp-d16 -DPART_TM4C123GH6PM -Os -ffunction-sections -fdata-sections -Wall -specs="nosys.specs" -mcpu=cortex-m4 -Wl,-Map,"I2C_Peripheral_Sim.map" -mfloat-abi=hard -o"I2C_Peripheral_Sim.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "MAX7300.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" 
-	-$(RM) "MAX7300.d" "main.d" "tm4c123gh6pm_startup_ccs.d" 
+	-$(RM) "MAX7300.o" "main.o" "tm4c123gh6pm_startup_ccs_gcc.o" 
+	-$(RM) "MAX7300.d" "main.d" "tm4c123gh6pm_startup_ccs_gcc.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

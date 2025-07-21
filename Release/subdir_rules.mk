@@ -5,10 +5,10 @@
 SHELL = cmd.exe
 
 # Each subdirectory must supply rules for building sources it contributes
-%.obj: ../%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+%.o: ../%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
 	@echo 'Building file: "$<"'
-	@echo 'Invoking: Arm Compiler'
-	"C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me -O2 --include_path="C:/ti/TivaWare_C_Series-2.2.0.295" --include_path="C:/Users/cleme/Documents/I2C_Peripheral_Sim" --include_path="C:/ti/ccs1240/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Invoking: GNU Compiler'
+	"C:/arm/Arm-GNU-Toolchain-arm-none-eabi/14.2-rel1/bin/arm-none-eabi-gcc-14.2.1.exe" -c -mcpu=cortex-m4 -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DPART_TM4C123GH6PM -I"C:/Users/cleme/Documents/I2C_Peripheral_Sim" -I"C:/ti/TivaWare_C_Series-2.2.0.295" -I"C:/arm/Arm-GNU-Toolchain-arm-none-eabi/14.2-rel1/arm-none-eabi/include" -Os -ffunction-sections -fdata-sections -Wall -specs="nosys.specs" -MMD -MP -MF"$(basename $(<F)).d" -MT"$(@)"  -v $(GEN_OPTS__FLAG) -o"$@" "$<"
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
