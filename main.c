@@ -33,7 +33,7 @@ int main(void)
     I2C0_Init();
     I2C1_Init();
     uint8_t i;
-    for(i = 0; i < 5; i++){
+    for(i = 0; i < 4; i++){
         MAX7300Init(&devices[i], addresses[i], AAI);
     }
     IntMasterEnable();
