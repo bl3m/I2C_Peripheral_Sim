@@ -138,7 +138,7 @@ all: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
 I2C_Peripheral_Sim.out: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: GNU Linker'
-	"C:/arm/Arm-GNU-Toolchain-arm-none-eabi/14.2-rel1/bin/arm-none-eabi-gcc-14.2.1.exe" -mfpu=fpv4-sp-d16 -DPART_TM4C123GH6PM -Og -ffunction-sections -fdata-sections -g -gdwarf-3 -gstrict-dwarf -Wall -specs="nosys.specs" -mcpu=cortex-m4 -Wl,-Map,"I2C_Peripheral_Sim.map" -mfloat-abi=hard -o"I2C_Peripheral_Sim.out" $(ORDERED_OBJS)
+	"C:/arm/Arm-GNU-Toolchain-arm-none-eabi/14.2-rel1/bin/arm-none-eabi-gcc-14.2.1.exe" -mfpu=fpv4-sp-d16 -DPART_TM4C123GH6PM -Og -ffunction-sections -fdata-sections -g -gdwarf-3 -gstrict-dwarf -Wall -specs="nosys.specs" -mcpu=cortex-m4 -Wl,-Map,"I2C_Peripheral_Sim.map" -nostdlib -mfloat-abi=hard -o"I2C_Peripheral_Sim.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 

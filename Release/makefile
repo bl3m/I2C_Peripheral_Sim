@@ -132,7 +132,7 @@ EXE_OUTPUTS__QUOTED += \
 
 # All Target
 all: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory "I2C_Peripheral_Sim.out"
+	@$(MAKE) --no-print-directory -j4 "I2C_Peripheral_Sim.out"
 
 # Tool invocations
 I2C_Peripheral_Sim.out: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
